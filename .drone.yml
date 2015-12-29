@@ -19,5 +19,6 @@ publish:
     password: $$DOCKER_PASSWORD
     email: $$DOCKER_EMAIL
     repo: armhfbuild/drone-exec
+    storage_driver: overlay
     when:
       branch: master
