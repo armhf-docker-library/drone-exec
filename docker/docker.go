@@ -19,7 +19,7 @@ func NewClient(docker dockerclient.Client) (*Client, error) {
 	}
 	conf.Entrypoint = []string{"/bin/sleep"}
 	conf.Cmd = []string{"86400"}
-	conf.Image = "gliderlabs/alpine:3.1"
+	conf.Image = "armhfbuild/alpine:3.1"
 	conf.Volumes = map[string]struct{}{}
 	conf.Volumes["/drone"] = struct{}{}
 	info, err := Start(docker, conf, nil, false)

@@ -15,9 +15,9 @@ var (
 )
 
 const (
-	DefaultCloner = "plugins/drone-git"   // Default clone plugin.
-	DefaultCacher = "plugins/drone-cache" // Default cache plugin.
-	DefaultMatch  = "plugins/*"           // Default plugin whitelist.
+	DefaultCloner = "armhfplugins/drone-git"   // Default clone plugin.
+	DefaultCacher = "armhfplugins/drone-cache" // Default cache plugin.
+	DefaultMatch  = "armhfplugins/*"           // Default plugin whitelist.
 )
 
 // RuleFunc defines a function used to validate or modify the yaml during
@@ -145,7 +145,7 @@ func Escalate(n Node) error {
 		return nil
 	}
 	image := strings.Split(d.Image, ":")
-	if d.NodeType == NodePublish && (image[0] == "plugins/drone-docker" || image[0] == "plugins/drone-gcr") {
+	if d.NodeType == NodePublish && (image[0] == "armhfplugins/drone-docker" || image[0] == "armhfplugins/drone-gcr") {
 
 		d.Privileged = true
 		d.Volumes = nil
@@ -265,7 +265,7 @@ func MountFunc(from, to string) RuleFunc {
 // fully qualified image name.
 func expandImage(image string) string {
 	if !strings.Contains(image, "/") {
-		image = path.Join("plugins", "drone-"+image)
+		image = path.Join("armhfplugins", "drone-"+image)
 	}
 	return strings.Replace(image, "_", "-", -1)
 }

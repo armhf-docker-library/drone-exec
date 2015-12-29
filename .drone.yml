@@ -1,11 +1,11 @@
 
 build:
-  image: golang:1.5
+  image: armhfbuild/golang:1.5
   environment:
     - GOPATH=/drone
     - GO15VENDOREXPERIMENT=1
     - GOOS=linux
-    - GOARCH=amd64
+    - GOARCH=arm
     - CGO_ENABLED=0
   commands:
     - go get github.com/franela/goblin
@@ -15,9 +15,9 @@ build:
 
 publish:
   docker:
-    username: drone
-    password: $$DOCKER_PASS
+    username: $$DOCKER_USER
+    password: $$DOCKER_PASSWORD
     email: $$DOCKER_EMAIL
-    repo: drone/drone-exec
+    repo: armhfbuild/drone-exec
     when:
       branch: master

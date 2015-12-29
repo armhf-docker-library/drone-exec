@@ -13,10 +13,10 @@ import (
 var ErrNoImage = errors.New("Yaml must specify an image for every step")
 
 // Default clone plugin.
-const DefaultCloner = "plugins/drone-git"
+const DefaultCloner = "armhfplugins/drone-git"
 
 // Default cache plugin.
-const DefaultCacher = "plugins/drone-cache"
+const DefaultCacher = "armhfplugins/drone-cache"
 
 type Build struct {
 	tree  *parser.Tree
@@ -121,7 +121,7 @@ func expectMatch() {
 func maybeResolveImage() {}
 
 func maybeEscalate(conf dockerclient.ContainerConfig, node *parser.DockerNode) {
-	if node.Image == "plugins/drone-docker" || node.Image == "plugins/drone-gcr" {
+	if node.Image == "armhfplugins/drone-docker" || node.Image == "armhfplugins/drone-gcr" {
 		return
 	}
 	conf.Volumes = nil
@@ -142,6 +142,6 @@ func shouldSkip(flags parser.NodeType, nodeType parser.NodeType) bool {
 // if the plugin should be escalated to start the container
 // in privileged mode.
 func shouldEscalate(node *parser.DockerNode) bool {
-	return node.Image == "plugins/drone-docker" ||
-		node.Image == "plugins/drone-gcr"
+	return node.Image == "armhfplugins/drone-docker" ||
+		node.Image == "armhfplugins/drone-gcr"
 }
