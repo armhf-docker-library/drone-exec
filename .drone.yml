@@ -1,3 +1,5 @@
+clone:
+  path: github.com/drone/drone-exec
 
 build:
   image: armhfbuild/golang:1.5
