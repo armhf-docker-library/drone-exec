@@ -16,14 +16,27 @@ build:
     - go build
 
 publish:
-  docker:
+  docker_master:
+    image: armhfplugins/drone-docker
     username: $$DOCKER_USER
     password: $$DOCKER_PASSWORD
     email: $$DOCKER_EMAIL
     repo: armhfbuild/drone-exec
-    storage_driver: overlay
+    tag:
+      - latest
     when:
+      repo: armhf-docker-library/drone-exec
       branch: master
+
+  docker_branch:
+    image: armhfplugins/drone-docker
+    username: $$DOCKER_USER
+    password: $$DOCKER_PASSWORD
+    email: $$DOCKER_EMAIL
+    repo: armhfbuild/drone-exec
+    tag: $$BRANCH
+    when:
+      repo: armhf-docker-library/drone-exec
 
 notify:
   slack:
