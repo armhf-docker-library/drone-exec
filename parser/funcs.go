@@ -156,6 +156,26 @@ func Escalate(n Node) error {
 	return nil
 }
 
+func StorageDriver(n Node, storageDriver string) error {
+	d, ok := n.(*DockerNode)
+	if !ok {
+		return nil
+	}
+	image := strings.Split(d.Image, ":")
+	if d.NodeType == NodePublish && (image[0] == "armhfplugins/drone-docker") {
+		if d.Vargs["storage_driver"] == nil {
+			d.Vargs["storage_driver"] = storageDriver
+		}
+	}
+	return nil
+}
+
+func StorageDriverFunc(storageDriver string) RuleFunc {
+	return func(n Node) error {
+		return StorageDriver(n, storageDriver)
+	}
+}
+
 func DefaultNotifyFilter(n Node) error {
 	f, ok := n.(*FilterNode)
 	if !ok || f.Node == nil {
